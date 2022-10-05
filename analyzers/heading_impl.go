@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+const headingHtmlTag = "[hH][1-9]"
+
 type headingAnalyzer struct {
 	headings map[string][]string
 }
@@ -25,7 +27,7 @@ func (h *headingAnalyzer) Analyze(data interface{}) {
 		switch tokenizer.Next() {
 		case html.StartTagToken:
 			token := tokenizer.Token()
-			match, err := regexp.MatchString("[hH][1-9]", token.Data)
+			match, err := regexp.MatchString(headingHtmlTag, token.Data)
 			if err != nil {
 				log.Println("error in matching headings", err)
 			}
