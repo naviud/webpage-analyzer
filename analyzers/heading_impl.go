@@ -1,6 +1,8 @@
 package analyzers
 
 import (
+	"github.com/naviud/webpage-analyzer/analyzers/schema"
+	"github.com/naviud/webpage-analyzer/handlers/http/responses"
 	"golang.org/x/net/html"
 	"log"
 	"regexp"
@@ -10,18 +12,14 @@ import (
 const headingHtmlTag = "[hH][1-9]"
 
 type headingAnalyzer struct {
-	headings map[string][]string
 }
 
 func NewHeadingAnalyzer() Analyzer {
-	obj := headingAnalyzer{
-		headings: make(map[string][]string),
-	}
-	return &obj
+	return &headingAnalyzer{}
 }
 
-func (h *headingAnalyzer) Analyze(data interface{}) {
-	tokenizer := html.NewTokenizer(strings.NewReader(data.(string)))
+func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))
 	for {
 	InnerLoopBreakLabel:
 		switch tokenizer.Next() {
@@ -35,12 +33,12 @@ func (h *headingAnalyzer) Analyze(data interface{}) {
 				tokenizer.Next()
 				tmpTkn := tokenizer.Token()
 				if tmpTkn.Type == html.TextToken {
-					h.headings[token.Data] = append(h.headings[token.Data], tmpTkn.Data)
+					analysis.AddHeadingLevel(token.Data, tmpTkn.Data)
 				} else {
 					for {
 						switch tokenizer.Next() {
 						case html.TextToken:
-							h.headings[token.Data] = append(h.headings[token.Data], tokenizer.Token().Data)
+							analysis.AddHeadingLevel(token.Data, tokenizer.Token().Data)
 							break InnerLoopBreakLabel
 						}
 					}
@@ -50,8 +48,4 @@ func (h *headingAnalyzer) Analyze(data interface{}) {
 			return
 		}
 	}
-}
-
-func (h *headingAnalyzer) Get() interface{} {
-	return h.headings
 }

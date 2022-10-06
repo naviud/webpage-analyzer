@@ -2,16 +2,25 @@ package analyzers
 
 import (
 	"fmt"
+	"github.com/naviud/webpage-analyzer/analyzers/schema"
 	"github.com/naviud/webpage-analyzer/channels"
-	"github.com/naviud/webpage-analyzer/entites"
+	"github.com/naviud/webpage-analyzer/handlers/http/responses"
 	"golang.org/x/net/html"
 	"log"
-	"net/url"
 	"strings"
 	"sync"
 )
 
+type LinkProperty struct {
+	Url        string
+	Type       LinkType
+	StatusCode int
+}
+type LinkType int
+
 const (
+	Internal LinkType = iota
+	External
 	linkHtmlTag = "a"
 	href        = "href"
 	http        = "http"
@@ -20,44 +29,52 @@ const (
 var wg sync.WaitGroup
 
 type linkAnalyzer struct {
-	links     sync.Map
-	domainUrl string
+	links sync.Map
 }
 
-func NewLinkAnalyzer() LinkAnalyzer {
+func NewLinkAnalyzer() Analyzer {
 	obj := linkAnalyzer{}
 	return &obj
 }
 
-func (l *linkAnalyzer) Analyze(data interface{}) {
-	var size int
+func (l *linkAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
 	l.prepare(data)
+	wg.Add(l.getMapLength())
 	l.links.Range(func(key, value interface{}) bool {
-		size++
-		return true
-	})
+		u := channels.NewUrlExecutor(
+			key.(string),
+			&wg,
+			func(key string, value int) {
+				linkProp, ok := l.links.Load(key)
+				if !ok {
+					log.Println(fmt.Sprintf("key : %v does not exist", key))
+				}
+				tmpLinkProp := linkProp.(LinkProperty)
+				tmpLinkProp.StatusCode = value
 
-	wg.Add(size)
-	l.links.Range(func(key, value interface{}) bool {
-		u := channels.NewUrlExecutor(key.(string), &l.links, &wg)
+				l.links.Store(key, tmpLinkProp)
+				log.Println("stored", key)
+			})
 		channels.UrlExecutorChannel <- u
 		return true
 	})
 	wg.Wait()
+	log.Println("all executed")
+	l.setWebPageAnalyzer(analysis)
 }
 
-func (l *linkAnalyzer) prepare(data interface{}) {
-	tokenizer := html.NewTokenizer(strings.NewReader(data.(string)))
+func (l *linkAnalyzer) prepare(data *schema.AnalyzerInfo) {
+	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))
 	for {
 		switch tokenizer.Next() {
 		case html.StartTagToken:
 			token := tokenizer.Token()
 			if token.Data == linkHtmlTag {
-				tmpUrl := getAttribute(token, href)
+				tmpUrl := GetTagAttribute(token, href)
 				if isValidLink(tmpUrl) {
-					tmpLinkOb := entites.LinkProperty{
+					tmpLinkOb := LinkProperty{
 						Url:  tmpUrl,
-						Type: l.getLinkType(tmpUrl),
+						Type: getLinkType(tmpUrl, data.GetHost()),
 					}
 					l.links.Store(tmpUrl, tmpLinkOb)
 					log.Println(fmt.Sprintf("added : %+v", tmpLinkOb))
@@ -70,31 +87,31 @@ func (l *linkAnalyzer) prepare(data interface{}) {
 }
 
 func (l *linkAnalyzer) Get() interface{} {
-	return l.links
+	return &l.links
 }
 
-func (l *linkAnalyzer) SetProperty(value interface{}) {
-	l.domainUrl = value.(string)
+func (l *linkAnalyzer) getMapLength() int {
+	var size int
+	l.links.Range(func(key, value interface{}) bool {
+		size++
+		return true
+	})
+	return size
 }
 
-func (l *linkAnalyzer) getLinkType(link string) entites.LinkType {
-	url, err := url.Parse(l.domainUrl)
-	if err != nil {
-
-	}
-	if strings.Contains(link, url.Host) {
-		return entites.Internal
-	}
-	return entites.External
+func (l *linkAnalyzer) setWebPageAnalyzer(analysis *responses.WebPageAnalyzerResponseManager) {
+	l.links.Range(func(key, value interface{}) bool {
+		v := value.(LinkProperty)
+		analysis.AddUrlInfo(v.Url, int(v.Type), v.StatusCode, 0)
+		return true
+	})
 }
 
-func getAttribute(token html.Token, name string) string {
-	for _, attribute := range token.Attr {
-		if attribute.Key == name {
-			return attribute.Val
-		}
+func getLinkType(link string, host string) LinkType {
+	if strings.Contains(link, host) {
+		return Internal
 	}
-	return ""
+	return External
 }
 
 func isValidLink(link string) bool {

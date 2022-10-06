@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40d09095-ac05-4541-95b6-cde6a4e81a9c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/link_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/link_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/title_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/title_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/url_executor.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entites/link_property.go" beforeDir="false" afterPath="$PROJECT_DIR$/entites/link_property.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
@@ -95,11 +98,26 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/analyzers/title.go</url>
-          <line>19</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/analyzers/util.go</url>
+          <line>6</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/analyzers/login_form.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/analyzers/login_form.go</url>
+          <line>32</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="tokenizer.Token()" language="go" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
