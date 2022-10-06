@@ -9,12 +9,14 @@ import (
 	"log"
 	"strings"
 	"sync"
+	"time"
 )
 
 type LinkProperty struct {
 	Url        string
 	Type       LinkType
 	StatusCode int
+	Latency    int64
 }
 type LinkType int
 
@@ -38,22 +40,29 @@ func NewLinkAnalyzer() Analyzer {
 }
 
 func (l *linkAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+	startTime := time.Now()
+	log.Println("link analyzer started")
+	defer func(start time.Time) {
+		log.Println(fmt.Sprintf("link analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+	}(startTime)
+
 	l.prepare(data)
 	wg.Add(l.getMapLength())
 	l.links.Range(func(key, value interface{}) bool {
 		u := channels.NewUrlExecutor(
 			key.(string),
 			&wg,
-			func(key string, value int) {
+			func(key string, value int, latency int64) {
 				linkProp, ok := l.links.Load(key)
 				if !ok {
 					log.Println(fmt.Sprintf("key : %v does not exist", key))
 				}
 				tmpLinkProp := linkProp.(LinkProperty)
 				tmpLinkProp.StatusCode = value
+				tmpLinkProp.Latency = latency
 
 				l.links.Store(key, tmpLinkProp)
-				log.Println("stored", key)
+				//log.Println("stored", key)
 			})
 		channels.UrlExecutorChannel <- u
 		return true
@@ -77,7 +86,7 @@ func (l *linkAnalyzer) prepare(data *schema.AnalyzerInfo) {
 						Type: getLinkType(tmpUrl, data.GetHost()),
 					}
 					l.links.Store(tmpUrl, tmpLinkOb)
-					log.Println(fmt.Sprintf("added : %+v", tmpLinkOb))
+					//log.Println(fmt.Sprintf("added : %+v", tmpLinkOb))
 				}
 			}
 		case html.ErrorToken:
@@ -102,7 +111,7 @@ func (l *linkAnalyzer) getMapLength() int {
 func (l *linkAnalyzer) setWebPageAnalyzer(analysis *responses.WebPageAnalyzerResponseManager) {
 	l.links.Range(func(key, value interface{}) bool {
 		v := value.(LinkProperty)
-		analysis.AddUrlInfo(v.Url, int(v.Type), v.StatusCode, 0)
+		analysis.AddUrlInfo(v.Url, int(v.Type), v.StatusCode, v.Latency)
 		return true
 	})
 }

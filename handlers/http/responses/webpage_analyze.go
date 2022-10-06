@@ -25,10 +25,10 @@ type Heading struct {
 }
 
 type Url struct {
-	Url     string  `json:"url"`
-	Type    string  `json:"type"`
-	Status  int     `json:"status"`
-	Latency float32 `json:"latency"`
+	Url     string `json:"url"`
+	Type    string `json:"type"`
+	Status  int    `json:"status"`
+	Latency int64  `json:"latency"`
 }
 
 func NewWebPageAnalyzerResponseManager() *WebPageAnalyzerResponseManager {
@@ -83,7 +83,7 @@ func (w *WebPageAnalyzerResponseManager) AddHeadingLevel(tag string, level strin
 	}
 }
 
-func (w *WebPageAnalyzerResponseManager) AddUrlInfo(url string, urlType int, status int, latency float32) {
+func (w *WebPageAnalyzerResponseManager) AddUrlInfo(url string, urlType int, status int, latency int64) {
 	urlTypeStr := "External"
 
 	w.lock.Lock()

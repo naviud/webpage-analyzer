@@ -1,9 +1,12 @@
 package analyzers
 
 import (
+	"fmt"
 	"github.com/naviud/webpage-analyzer/analyzers/schema"
 	"github.com/naviud/webpage-analyzer/handlers/http/responses"
+	"log"
 	"strings"
+	"time"
 )
 
 const unknownVersion string = "Unknown"
@@ -28,6 +31,12 @@ func NewHtmlVersionAnalyzer() Analyzer {
 }
 
 func (h *htmlVersionAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+	startTime := time.Now()
+	log.Println("html version analyzer started")
+	defer func(start time.Time) {
+		log.Println(fmt.Sprintf("html version analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+	}(startTime)
+
 	version := unknownVersion
 	for name, value := range h.types {
 		if strings.Contains(data.GetBody(), value) {

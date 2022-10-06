@@ -6,12 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="40d09095-ac05-4541-95b6-cde6a4e81a9c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/heading_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/heading_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/html_version_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/html_version_impl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analyzers/link_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/link_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/login_form.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/login_form.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analyzers/title_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/title_impl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/channels/url_executor.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entites/link_property.go" beforeDir="false" afterPath="$PROJECT_DIR$/entites/link_property.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/controllers/webpage_analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/controllers/webpage_analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/responses/webpage_analyze.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/webpage_analyze.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,23 +45,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.vendoring.notification.had.been.shown": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/home/udayanga/work/src/github.com/HasinduLanka/InspectGo"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.vendoring.notification.had.been.shown&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/udayanga/work/src/github.com/HasinduLanka/InspectGo&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Go Build.go build github.com/naviud/webpage-analyzer">
     <configuration name="go build github.com/naviud/webpage-analyzer" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="webpage-analyzer" />
@@ -104,12 +106,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/analyzers/login_form.go</url>
-          <line>24</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/analyzers/login_form.go</url>
-          <line>32</line>
+          <line>37</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>

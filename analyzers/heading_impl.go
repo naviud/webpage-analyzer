@@ -1,12 +1,14 @@
 package analyzers
 
 import (
+	"fmt"
 	"github.com/naviud/webpage-analyzer/analyzers/schema"
 	"github.com/naviud/webpage-analyzer/handlers/http/responses"
 	"golang.org/x/net/html"
 	"log"
 	"regexp"
 	"strings"
+	"time"
 )
 
 const headingHtmlTag = "[hH][1-9]"
@@ -19,6 +21,12 @@ func NewHeadingAnalyzer() Analyzer {
 }
 
 func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+	startTime := time.Now()
+	log.Println("heading analyzer started")
+	defer func(start time.Time) {
+		log.Println(fmt.Sprintf("heading analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+	}(startTime)
+
 	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))
 	for {
 	InnerLoopBreakLabel:
