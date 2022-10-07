@@ -20,11 +20,11 @@ func NewHeadingAnalyzer() Analyzer {
 	return &headingAnalyzer{}
 }
 
-func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
 	startTime := time.Now()
-	log.Println("heading analyzer started")
+	log.Println("Heading analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("heading analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Println(fmt.Sprintf("Heading analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
 	}(startTime)
 
 	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))
@@ -35,7 +35,7 @@ func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses
 			token := tokenizer.Token()
 			match, err := regexp.MatchString(headingHtmlTag, token.Data)
 			if err != nil {
-				log.Println("error in matching headings", err)
+				log.Println("Error in matching headings", err)
 			}
 			if match {
 				tokenizer.Next()

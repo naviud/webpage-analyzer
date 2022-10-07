@@ -39,11 +39,11 @@ func NewLinkAnalyzer() Analyzer {
 	return &obj
 }
 
-func (l *linkAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+func (l *linkAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
 	startTime := time.Now()
-	log.Println("link analyzer started")
+	log.Println("Link analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("link analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Println(fmt.Sprintf("Link analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
 	}(startTime)
 
 	l.prepare(data)
@@ -55,7 +55,8 @@ func (l *linkAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.We
 			func(key string, value int, latency int64) {
 				linkProp, ok := l.links.Load(key)
 				if !ok {
-					log.Println(fmt.Sprintf("key : %v does not exist", key))
+					log.Println(fmt.Sprintf("Key : %v does not exist", key))
+					return
 				}
 				tmpLinkProp := linkProp.(LinkProperty)
 				tmpLinkProp.StatusCode = value
@@ -68,7 +69,6 @@ func (l *linkAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.We
 		return true
 	})
 	wg.Wait()
-	log.Println("all executed")
 	l.setWebPageAnalyzer(analysis)
 }
 
@@ -108,7 +108,7 @@ func (l *linkAnalyzer) getMapLength() int {
 	return size
 }
 
-func (l *linkAnalyzer) setWebPageAnalyzer(analysis *responses.WebPageAnalyzerResponseManager) {
+func (l *linkAnalyzer) setWebPageAnalyzer(analysis *responses.AnalysisSuccessResponseManager) {
 	l.links.Range(func(key, value interface{}) bool {
 		v := value.(LinkProperty)
 		analysis.AddUrlInfo(v.Url, int(v.Type), v.StatusCode, v.Latency)

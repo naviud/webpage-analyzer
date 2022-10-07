@@ -23,11 +23,11 @@ func NewLoginFormAnalyzer() Analyzer {
 	return &loginFormAnalyzer{}
 }
 
-func (l *loginFormAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+func (l *loginFormAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
 	startTime := time.Now()
-	log.Println("login form analyzer started")
+	log.Println("Login form analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("login form analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Println(fmt.Sprintf("Login form analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
 	}(startTime)
 
 	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))

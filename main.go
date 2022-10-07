@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/naviud/webpage-analyzer/analyzers"
 	"github.com/naviud/webpage-analyzer/channels"
+	"github.com/naviud/webpage-analyzer/configurations"
 	"github.com/naviud/webpage-analyzer/handlers/http/controllers"
 	"github.com/naviud/webpage-analyzer/handlers/http/engines"
 	"log"
@@ -16,28 +17,26 @@ import (
 )
 
 func main() {
+	var svrDefault http.Server
+
 	sig := make(chan os.Signal, 0)
 	signal.Notify(sig, syscall.SIGTERM, syscall.SIGINT, syscall.SIGKILL)
 
-	var svrDefault http.Server
+	configurations.Configurations{
+		configurations.GetAppConfig(),
+	}.Init()
 
-	channels.InitUrlExecutorThreadPool()
-
-	htmlVersionAnalyzer := analyzers.NewHtmlVersionAnalyzer()
-	titleAnalyzer := analyzers.NewTitleAnalyzer()
-	headingAnalyzer := analyzers.NewHeadingAnalyzer()
-	linkAnalyzer := analyzers.NewLinkAnalyzer()
-	loginFormAnalyzer := analyzers.NewLoginFormAnalyzer()
+	channels.InitUrlExecutorThreadPool(configurations.GetAppConfig().ChannelCount)
 
 	controller := controllers.NewWebPageAnalyzerController(
-		htmlVersionAnalyzer,
-		titleAnalyzer,
-		headingAnalyzer,
-		linkAnalyzer,
-		loginFormAnalyzer)
+		analyzers.NewHtmlVersionAnalyzer(),
+		analyzers.NewTitleAnalyzer(),
+		analyzers.NewHeadingAnalyzer(),
+		analyzers.NewLinkAnalyzer(),
+		analyzers.NewLoginFormAnalyzer())
 
 	svrDefault = http.Server{
-		Addr:         fmt.Sprintf(":%v", "8080"),
+		Addr:         fmt.Sprintf(":%v", configurations.GetAppConfig().ServicePort),
 		Handler:      engines.NewDefaultEngine(controller).GetDefaultEngine(),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
@@ -46,15 +45,15 @@ func main() {
 
 	go func() {
 		if err := svrDefault.ListenAndServe(); err != nil {
-			log.Fatal("failed to start the server", err)
+			log.Fatal("Failed to start the server", err)
 		}
 	}()
 
 	select {
 	case <-sig:
-		log.Println("shutting down...")
+		log.Println("Shutting down...")
 		if err := svrDefault.Shutdown(context.Background()); err != nil {
-			log.Fatal("failed to stop the server", err)
+			log.Fatal("Failed to stop the server", err)
 		}
 	}
 

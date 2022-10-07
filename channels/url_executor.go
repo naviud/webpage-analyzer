@@ -2,6 +2,7 @@ package channels
 
 import (
 	"fmt"
+	"github.com/naviud/webpage-analyzer/configurations"
 	"net"
 	"os"
 	"os/signal"
@@ -31,10 +32,10 @@ func NewUrlExecutor(url string, wg *sync.WaitGroup, fn ExecFunc) UrlExecutor {
 
 var UrlExecutorChannel chan UrlExecutor
 
-func InitUrlExecutorThreadPool() {
+func InitUrlExecutorThreadPool(threadCount int) {
 	UrlExecutorChannel = make(chan UrlExecutor)
 
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= threadCount; i++ {
 		go executeUrl(UrlExecutorChannel, i)
 	}
 }
@@ -59,9 +60,8 @@ SignalBreakLabel:
 func execute(url string, wg *sync.WaitGroup, fn func(url string, status int, latency int64)) {
 	startTime := time.Now()
 	defer wg.Done()
-	//log.Println(fmt.Sprintf("Starting the request : %v", url))
 	c := &http.Client{
-		Timeout: 3 * time.Second,
+		Timeout: configurations.GetAppConfig().LinkTimeoutInMs,
 	}
 	res, err := c.Get(url)
 	if err != nil {
@@ -70,7 +70,7 @@ func execute(url string, wg *sync.WaitGroup, fn func(url string, status int, lat
 		} else {
 			fn(url, http.StatusBadRequest, time.Since(startTime).Milliseconds())
 		}
-		log.Println("error", url, err)
+		log.Println("Error in getting response", url, err)
 		return
 	}
 	defer res.Body.Close()

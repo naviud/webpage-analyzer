@@ -14,6 +14,7 @@ func NewDefaultEngine(ctrl *controllers.WebPageAnalyzerController) *DefaultEngin
 }
 
 func (d *DefaultEngine) GetDefaultEngine() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	engine := gin.New()
 
 	engine.GET("/v1/analyze", d.webPageAnalyzeController.AnalyzeWebPage)

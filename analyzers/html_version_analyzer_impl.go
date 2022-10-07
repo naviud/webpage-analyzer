@@ -30,11 +30,11 @@ func NewHtmlVersionAnalyzer() Analyzer {
 	return &obj
 }
 
-func (h *htmlVersionAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.WebPageAnalyzerResponseManager) {
+func (h *htmlVersionAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
 	startTime := time.Now()
-	log.Println("html version analyzer started")
+	log.Println("Html version analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("html version analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Println(fmt.Sprintf("Html version analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
 	}(startTime)
 
 	version := unknownVersion
