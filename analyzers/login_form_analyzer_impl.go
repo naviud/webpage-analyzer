@@ -1,7 +1,6 @@
 package analyzers
 
 import (
-	"fmt"
 	"github.com/naviud/webpage-analyzer/analyzers/schema"
 	"github.com/naviud/webpage-analyzer/handlers/http/responses"
 	"golang.org/x/net/html"
@@ -23,11 +22,11 @@ func NewLoginFormAnalyzer() Analyzer {
 	return &loginFormAnalyzer{}
 }
 
-func (l *loginFormAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
+func (l *loginFormAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Login form analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("Login form analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Printf("Login form analyzer completed. Time taken : %v ms", time.Since(start).Milliseconds())
 	}(startTime)
 
 	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))

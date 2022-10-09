@@ -2,7 +2,7 @@ package responses
 
 type ErrorResponse struct {
 	Message          string `json:"message"`
-	DeveloperMessage string `json:"developer_message"`
+	DeveloperMessage string `json:"developerMessage"`
 }
 
 func NewErrorResponse(message string, err error) ErrorResponse {

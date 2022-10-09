@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<checkstyle version="5.0">
+  <file name="handlers/http/controllers/webpage_analyzer.go">
+    <error column="15" line="70" message="G107: Potential HTTP request made with variable url" severity="error" source="gosec">
+    </error>
+  </file>
+</checkstyle>

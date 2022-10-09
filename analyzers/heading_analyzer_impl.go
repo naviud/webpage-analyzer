@@ -1,7 +1,6 @@
 package analyzers
 
 import (
-	"fmt"
 	"github.com/naviud/webpage-analyzer/analyzers/schema"
 	"github.com/naviud/webpage-analyzer/handlers/http/responses"
 	"golang.org/x/net/html"
@@ -20,12 +19,18 @@ func NewHeadingAnalyzer() Analyzer {
 	return &headingAnalyzer{}
 }
 
-func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
+func (h *headingAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Heading analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("Heading analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Printf("Heading analyzer completed. Time taken : %v ms", time.Since(start).Milliseconds())
 	}(startTime)
+
+	regex, err := regexp.Compile(headingHtmlTag)
+	if err != nil {
+		log.Println("Error in compiling the regex", err)
+		return
+	}
 
 	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))
 	for {
@@ -33,10 +38,7 @@ func (h *headingAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses
 		switch tokenizer.Next() {
 		case html.StartTagToken:
 			token := tokenizer.Token()
-			match, err := regexp.MatchString(headingHtmlTag, token.Data)
-			if err != nil {
-				log.Println("Error in matching headings", err)
-			}
+			match := regex.Match([]byte(token.Data))
 			if match {
 				tokenizer.Next()
 				tmpTkn := tokenizer.Token()

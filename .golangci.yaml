@@ -1,0 +1,29 @@
+run:
+  tests: false
+  skip-dirs:
+    - mocks
+    - testify_mocks
+    - test
+    - vendor
+  go: '1.16'
+output:
+  format: checkstyle:golangci-report.xml
+linters:
+  enable:
+    - cyclop
+    - gosec
+    - misspell
+    - sqlclosecheck
+    - rowserrcheck
+    - bodyclose
+    - wastedassign
+    - usestdlibvars
+    - unparam
+    - unconvert
+    - tagliatelle
+linters-settings:
+  tagliatelle:
+    case:
+      rules:
+        json: goCamel
+        yaml: goCamel

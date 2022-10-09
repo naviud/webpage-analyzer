@@ -1,7 +1,6 @@
 package analyzers
 
 import (
-	"fmt"
 	"github.com/naviud/webpage-analyzer/analyzers/schema"
 	"github.com/naviud/webpage-analyzer/handlers/http/responses"
 	"golang.org/x/net/html"
@@ -19,11 +18,11 @@ func NewTitleAnalyzer() Analyzer {
 	return &titleAnalyzer{}
 }
 
-func (t *titleAnalyzer) Analyze(data *schema.AnalyzerInfo, analysis *responses.AnalysisSuccessResponseManager) {
+func (t *titleAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Title analyzer started")
 	defer func(start time.Time) {
-		log.Println(fmt.Sprintf("Title analyzer completed. Time taken : %v ms", time.Since(startTime).Milliseconds()))
+		log.Printf("Title analyzer completed. Time taken : %v ms", time.Since(start).Milliseconds())
 	}(startTime)
 
 	tokenizer := html.NewTokenizer(strings.NewReader(data.GetBody()))

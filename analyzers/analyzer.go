@@ -6,5 +6,5 @@ import (
 )
 
 type Analyzer interface {
-	Analyze(*schema.AnalyzerInfo, *responses.AnalysisSuccessResponseManager)
+	Analyze(schema.AnalyzerInfo, responses.WebPageAnalyzerResponseManager)
 }

@@ -6,14 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="40d09095-ac05-4541-95b6-cde6a4e81a9c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzers/heading_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/heading_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzers/html_version_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/html_version_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzers/link_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/link_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzers/login_form.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/login_form.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzers/title_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/title_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/channels/url_executor.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/heading_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/heading_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/html_version_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/html_version_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/link_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/link_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/login_form_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/login_form_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/schema/analyzer_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/schema/analyzer_info_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/title_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/title_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/url_executor.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/app.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configurations/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/configurations/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entites/link_property.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/http/controllers/webpage_analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/controllers/webpage_analyzer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/http/responses/webpage_analyze.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/webpage_analyze.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/engines/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/engines/default.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/responses/error_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/error_response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/responses/success_analysis_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/success_analysis_response_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,46 +54,99 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.vendoring.notification.had.been.shown&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/udayanga/work/src/github.com/HasinduLanka/InspectGo&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.vendoring.notification.had.been.shown": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/udayanga/work/src/github.com/HasinduLanka/InspectGo",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
-  <component name="RunManager" selected="Go Build.go build github.com/naviud/webpage-analyzer">
-    <configuration name="go build github.com/naviud/webpage-analyzer" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="webpage-analyzer" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/naviud/webpage-analyzer" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/main.go" />
-      <method v="2" />
-    </configuration>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/firstapp" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build github.com/webpage-analyzer">
     <configuration name="go build github.com/webpage-analyzer" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="webpage-analyzer" />
       <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
+      <kind value="DIRECTORY" />
       <package value="github.com/webpage-analyzer" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="Test_AnalyzeLink_HappyPath in github.com/naviud/webpage-analyzer/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webpage-analyzer" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <kind value="PACKAGE" />
+      <package value="github.com/naviud/webpage-analyzer/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTest_AnalyzeLink_HappyPath\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_Analyze_FailurePath in github.com/naviud/webpage-analyzer/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webpage-analyzer" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <kind value="PACKAGE" />
+      <package value="github.com/naviud/webpage-analyzer/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTest_Analyze_FailurePath\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_Analyze_HappyPath in github.com/naviud/webpage-analyzer/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webpage-analyzer" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <kind value="PACKAGE" />
+      <package value="github.com/naviud/webpage-analyzer/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTest_Analyze_HappyPath\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test github.com/naviud/webpage-analyzer/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webpage-analyzer" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <kind value="PACKAGE" />
+      <package value="github.com/naviud/webpage-analyzer/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webpage-analyzer" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <kind value="DIRECTORY" />
+      <package value="github.com/naviud/webpage-analyzer" />
+      <directory value="$PROJECT_DIR$/test" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/naviud/webpage-analyzer" />
-        <item itemvalue="Go Build.go build github.com/webpage-analyzer" />
+        <item itemvalue="Go Test.go test github.com/naviud/webpage-analyzer/test" />
+        <item itemvalue="Go Test.Test_AnalyzeLink_HappyPath in github.com/naviud/webpage-analyzer/test" />
+        <item itemvalue="Go Test.go test test" />
+        <item itemvalue="Go Test.Test_Analyze_FailurePath in github.com/naviud/webpage-analyzer/test" />
+        <item itemvalue="Go Test.Test_Analyze_HappyPath in github.com/naviud/webpage-analyzer/test" />
       </list>
     </recent_temporary>
   </component>
@@ -100,21 +162,20 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/analyzers/util.go</url>
-          <line>6</line>
-          <option name="timeStamp" value="48" />
+          <url>file://$PROJECT_DIR$/analyzers/link_analyzer_impl.go</url>
+          <line>76</line>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/analyzers/login_form.go</url>
-          <line>37</line>
-          <option name="timeStamp" value="51" />
+          <url>file://$PROJECT_DIR$/analyzers/link_analyzer_impl.go</url>
+          <line>72</line>
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="GoApplicationRunConfiguration">
-        <watch expression="tokenizer.Token()" language="go" />
-      </configuration>
-    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/webpage_analyzer$go_test_test.out" NAME="go test test Coverage Results" MODIFIED="1665349179649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/webpage_analyzer$go_test_github_com_naviud_webpage_analyzer_test.out" NAME="go test github.com/naviud/webpage-analyzer/test Coverage Results" MODIFIED="1665355116085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

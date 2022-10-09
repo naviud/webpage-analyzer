@@ -1,7 +1,6 @@
 package configurations
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
@@ -9,9 +8,9 @@ import (
 )
 
 type appConfig struct {
-	ChannelCount    int           `yaml:"channel_count"`
-	LinkTimeoutInMs time.Duration `yaml:"link_timeout_in_ms"`
-	ServicePort     string        `yaml:"service_port"`
+	ChannelCount    int           `yaml:"channelCount"`
+	LinkTimeoutInMs time.Duration `yaml:"linkTimeoutInMs"`
+	ServicePort     string        `yaml:"servicePort"`
 }
 
 var config *appConfig
@@ -35,5 +34,5 @@ func (a *appConfig) Register() {
 
 	a.LinkTimeoutInMs = a.LinkTimeoutInMs * time.Millisecond
 
-	log.Println(fmt.Sprintf("App config : %+v", a))
+	log.Printf("App config : %+v", a)
 }
