@@ -24,14 +24,17 @@ func Test_Analyze_HappyPath(t *testing.T) {
 	url := "url1"
 	host := "host1"
 	body := "body1"
+	extractTime := int64(5)
 
 	mockAnalysis := mocks.NewMockWebPageAnalyzerResponseManager(controller)
 	mockBodyExtractor := mocks.NewMockBodyExtractor(controller)
 	a1 := mocks.NewMockAnalyzer(controller)
 	a2 := mocks.NewMockAnalyzer(controller)
 
+	mockAnalysis.EXPECT().SetExtractTime(gomock.Any())
+	mockAnalysis.EXPECT().SetServiceTime(gomock.Any())
 	mockAnalysis.EXPECT().To().Return(report)
-	mockBodyExtractor.EXPECT().Extract(gomock.Eq(url)).Return(host, body, nil)
+	mockBodyExtractor.EXPECT().Extract(gomock.Eq(url)).Return(host, body, extractTime, nil)
 	a1.EXPECT().Analyze(gomock.Any(), gomock.Eq(mockAnalysis))
 	a2.EXPECT().Analyze(gomock.Any(), gomock.Eq(mockAnalysis))
 
@@ -54,7 +57,7 @@ func Test_Analyze_FailurePath(t *testing.T) {
 	a1 := mocks.NewMockAnalyzer(controller)
 	a2 := mocks.NewMockAnalyzer(controller)
 
-	mockBodyExtractor.EXPECT().Extract(gomock.Eq(url)).Return("", "", err1)
+	mockBodyExtractor.EXPECT().Extract(gomock.Eq(url)).Return("", "", int64(0), err1)
 
 	c := controllers.NewWebPageAnalyzerController(mockBodyExtractor, a1, a2)
 	r, err := c.Analyze(mockAnalysis, url)

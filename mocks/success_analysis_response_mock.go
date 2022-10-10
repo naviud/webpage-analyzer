@@ -58,6 +58,18 @@ func (mr *MockWebPageAnalyzerResponseManagerMockRecorder) AddUrlInfo(url, urlTyp
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUrlInfo", reflect.TypeOf((*MockWebPageAnalyzerResponseManager)(nil).AddUrlInfo), url, urlType, status, latency)
 }
 
+// SetExtractTime mocks base method.
+func (m *MockWebPageAnalyzerResponseManager) SetExtractTime(extractTime int64) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetExtractTime", extractTime)
+}
+
+// SetExtractTime indicates an expected call of SetExtractTime.
+func (mr *MockWebPageAnalyzerResponseManagerMockRecorder) SetExtractTime(extractTime interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetExtractTime", reflect.TypeOf((*MockWebPageAnalyzerResponseManager)(nil).SetExtractTime), extractTime)
+}
+
 // SetHasLogin mocks base method.
 func (m *MockWebPageAnalyzerResponseManager) SetHasLogin(hasLogin bool) {
 	m.ctrl.T.Helper()
@@ -80,6 +92,18 @@ func (m *MockWebPageAnalyzerResponseManager) SetHtmlVersion(htmlVersion string) 
 func (mr *MockWebPageAnalyzerResponseManagerMockRecorder) SetHtmlVersion(htmlVersion interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHtmlVersion", reflect.TypeOf((*MockWebPageAnalyzerResponseManager)(nil).SetHtmlVersion), htmlVersion)
+}
+
+// SetServiceTime mocks base method.
+func (m *MockWebPageAnalyzerResponseManager) SetServiceTime(serviceTime int64) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetServiceTime", serviceTime)
+}
+
+// SetServiceTime indicates an expected call of SetServiceTime.
+func (mr *MockWebPageAnalyzerResponseManagerMockRecorder) SetServiceTime(serviceTime interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetServiceTime", reflect.TypeOf((*MockWebPageAnalyzerResponseManager)(nil).SetServiceTime), serviceTime)
 }
 
 // SetTitle mocks base method.

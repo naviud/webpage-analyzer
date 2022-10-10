@@ -10,6 +10,12 @@ type WebPageAnalyzerResponseManager interface {
 	// SetTitle For setting the page title
 	SetTitle(title string)
 
+	// SetServiceTime For setting the service time
+	SetServiceTime(serviceTime int64)
+
+	// SetExtractTime For setting the web page extracting time
+	SetExtractTime(extractTime int64)
+
 	// AddHeadingLevel For adding the headers as well append the levels.
 	AddHeadingLevel(tag string, level string)
 

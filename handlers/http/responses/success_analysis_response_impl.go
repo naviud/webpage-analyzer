@@ -12,11 +12,13 @@ type analysisSuccessResponseManager struct {
 }
 
 type AnalysisSuccessResponse struct {
-	HtmlVersion string    `json:"htmlVersion"`
-	Title       string    `json:"title"`
-	Headings    []Heading `json:"headings"`
-	Urls        []Url     `json:"urls"`
-	HasLogin    bool      `json:"hasLogin"`
+	HtmlVersion    string    `json:"htmlVersion"`
+	Title          string    `json:"title"`
+	ServiceTime    int64     `json:"serviceTime"`
+	WebExtractTime int64     `json:"webExtractTime"`
+	Headings       []Heading `json:"headings"`
+	Urls           []Url     `json:"urls"`
+	HasLogin       bool      `json:"hasLogin"`
 }
 
 type Heading struct {
@@ -52,6 +54,18 @@ func (w *analysisSuccessResponseManager) SetTitle(title string) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
 	w.successRes.Title = title
+}
+
+func (w *analysisSuccessResponseManager) SetServiceTime(serviceTime int64) {
+	w.lock.Lock()
+	defer w.lock.Unlock()
+	w.successRes.ServiceTime = serviceTime
+}
+
+func (w *analysisSuccessResponseManager) SetExtractTime(extractTime int64) {
+	w.lock.Lock()
+	defer w.lock.Unlock()
+	w.successRes.WebExtractTime = extractTime
 }
 
 func (w *analysisSuccessResponseManager) AddHeadingLevel(tag string, level string) {

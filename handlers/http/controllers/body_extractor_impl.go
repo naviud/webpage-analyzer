@@ -14,24 +14,25 @@ func NewBodyExtractor() BodyExtractor {
 	return &bodyExtractor{}
 }
 
-func (b *bodyExtractor) Extract(url string) (host string, bodyStr string, err error) {
+func (b *bodyExtractor) Extract(url string) (host string, bodyStr string, responseTime int64, err error) {
 	startTime := time.Now()
 	log.Println("URL body fetching started")
-	defer func(start time.Time) {
-		log.Printf("URL body fetching completed. Time taken : %v ms", time.Since(start).Milliseconds())
-	}(startTime)
 
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Println("Error occurred when getting the response", err)
-		return "", "", err
+		return "", "", 0, err
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println("Error occurred when reading the response", err)
-		return "", "", err
+		return "", "", 0, err
 	}
-	return resp.Request.Host, string(body), nil
+
+	resTime := time.Since(startTime).Milliseconds()
+	log.Printf("URL body fetching completed. Time taken : %v ms", resTime)
+
+	return resp.Request.Host, string(body), resTime, nil
 }

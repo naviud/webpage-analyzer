@@ -16,3 +16,4 @@ vendor
 -idea
 go.sum
 webpage-analyzer
+golangci-report.xml

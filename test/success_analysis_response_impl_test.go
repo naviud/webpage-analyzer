@@ -20,6 +20,20 @@ func Test_SetTitle_HappyPath(t *testing.T) {
 	assert.Equal(t, w.To().Title, title)
 }
 
+func Test_SetServiceTime_HappyPath(t *testing.T) {
+	serviceTime := 5
+	w := responses.NewWebPageAnalyzerResponseManager()
+	w.SetServiceTime(int64(serviceTime))
+	assert.Equal(t, w.To().ServiceTime, int64(serviceTime))
+}
+
+func Test_SetExtractTime_HappyPath(t *testing.T) {
+	extractTime := 5
+	w := responses.NewWebPageAnalyzerResponseManager()
+	w.SetExtractTime(int64(extractTime))
+	assert.Equal(t, w.To().WebExtractTime, int64(extractTime))
+}
+
 func Test_AddHeadingLevel_HappyPath(t *testing.T) {
 	tag := "h1"
 	level := "l1"

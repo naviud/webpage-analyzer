@@ -28,12 +28,6 @@ func NewWebPageAnalyzerController(bodyExtractor BodyExtractor, analyzers ...anal
 }
 
 func (wpa *WebPageAnalyzerController) AnalyzeWebPage(ginCtx *gin.Context) {
-	startTime := time.Now()
-	log.Println("Web page analysis started")
-	defer func(start time.Time) {
-		log.Printf("Web page analysis completed. Time taken : %v ms", time.Since(start).Milliseconds())
-	}(startTime)
-
 	resManager := responses.NewWebPageAnalyzerResponseManager()
 
 	urlParam := strings.TrimSpace(ginCtx.Query("url"))
@@ -48,38 +42,18 @@ func (wpa *WebPageAnalyzerController) AnalyzeWebPage(ginCtx *gin.Context) {
 		return
 	}
 	log.Println("All analyzers completed")
+	log.Printf("Web page analysis completed. Time taken : %v ms", res.ServiceTime)
 	ginCtx.IndentedJSON(http.StatusOK, res)
-	//
-	//host, body, err := wpa.extractor.Extract(urlParam)
-	//
-	//if err != nil {
-	//	log.Println(fmt.Sprintf("Error in getting the body for : %v", urlParam), err)
-	//	ginCtx.IndentedJSON(
-	//		http.StatusBadRequest,
-	//		responses.NewErrorResponse("Error in getting the body for the given URL", err))
-	//	return
-	//}
-	//
-	//analyzerInfo := schema.NewAnalyzerInfo(body, host)
-	//
-	//wg.Add(len(wpa.analyzers))
-	//for _, analyzer := range wpa.analyzers {
-	//	go func(a analyzers.Analyzer, w *sync.WaitGroup) {
-	//		a.Analyze(analyzerInfo, resManager)
-	//		w.Done()
-	//	}(analyzer, &wg)
-	//}
-	//wg.Wait()
-	//log.Println("All analyzers completed")
-	//ginCtx.IndentedJSON(http.StatusOK, resManager.To())
 }
 
-func (wpa *WebPageAnalyzerController) Analyze(resManager responses.WebPageAnalyzerResponseManager, url string) (
-	response responses.AnalysisSuccessResponse, err error) {
-	host, body, err := wpa.extractor.Extract(url)
+func (wpa *WebPageAnalyzerController) Analyze(resManager responses.WebPageAnalyzerResponseManager, url string) (response responses.AnalysisSuccessResponse, err error) {
+	startTime := time.Now()
+
+	host, body, extractTime, err := wpa.extractor.Extract(url)
 	if err != nil {
 		return responses.AnalysisSuccessResponse{}, err
 	}
+	resManager.SetExtractTime(extractTime)
 	analyzerInfo := schema.NewAnalyzerInfo(body, host)
 
 	wg.Add(len(wpa.analyzers))
@@ -91,5 +65,6 @@ func (wpa *WebPageAnalyzerController) Analyze(resManager responses.WebPageAnalyz
 	}
 	wg.Wait()
 
+	resManager.SetServiceTime(time.Since(startTime).Milliseconds())
 	return resManager.To(), nil
 }

@@ -49,6 +49,20 @@ func (mr *MockUrlExecutorMockRecorder) Build(url, wg, fn interface{}) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Build", reflect.TypeOf((*MockUrlExecutor)(nil).Build), url, wg, fn)
 }
 
+// Create mocks base method.
+func (m *MockUrlExecutor) Create() channels.UrlExecutor {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create")
+	ret0, _ := ret[0].(channels.UrlExecutor)
+	return ret0
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockUrlExecutorMockRecorder) Create() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockUrlExecutor)(nil).Create))
+}
+
 // PushChannel mocks base method.
 func (m *MockUrlExecutor) PushChannel() {
 	m.ctrl.T.Helper()
