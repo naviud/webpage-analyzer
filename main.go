@@ -22,21 +22,30 @@ func main() {
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGTERM, syscall.SIGINT)
 
+	// Initialize and load configurations.
 	configurations.Configurations{
 		configurations.GetAppConfig(),
 	}.Init()
 
+	// Initialize URL executor thread pool.
 	channels.InitUrlExecutorThreadPool(configurations.GetAppConfig().ChannelCount)
-	p := channels.NewUrlExecutorProvider(channels.NewUrlExecutor())
 
+	// Initialize the URL body extractor.
+	bodyExtractor := controllers.NewBodyExtractor()
+
+	// Initialize the analyzers.
+	htmlVersionAnalyzer := analyzers.NewHtmlVersionAnalyzer()
+	titleAnalyzer := analyzers.NewTitleAnalyzer()
+	headingAnalyzer := analyzers.NewHeadingAnalyzer()
+	linkAnalyzer := analyzers.NewLinkAnalyzer(channels.NewUrlExecutorProvider(channels.NewUrlExecutor()))
+	loginAnalyzer := analyzers.NewLoginFormAnalyzer()
+
+	// Initialize the controller.
 	controller := controllers.NewWebPageAnalyzerController(
-		controllers.NewBodyExtractor(),
-		analyzers.NewHtmlVersionAnalyzer(),
-		analyzers.NewTitleAnalyzer(),
-		analyzers.NewHeadingAnalyzer(),
-		analyzers.NewLinkAnalyzer(p),
-		analyzers.NewLoginFormAnalyzer())
+		bodyExtractor,
+		htmlVersionAnalyzer, titleAnalyzer, headingAnalyzer, linkAnalyzer, loginAnalyzer)
 
+	// Initialize the HTTP server.
 	svrDefault = http.Server{
 		Addr:         fmt.Sprintf(":%v", configurations.GetAppConfig().ServicePort),
 		Handler:      engines.NewDefaultEngine(controller).GetDefaultEngine(),
@@ -45,11 +54,15 @@ func main() {
 		IdleTimeout:  15 * time.Second,
 	}
 
+	// Run the HTTP server.
 	go func() {
 		if err := svrDefault.ListenAndServe(); err != nil {
 			log.Fatal("Failed to start the server", err)
 		}
 	}()
+
+	<-channels.ChanSvrStart
+	log.Printf("Service started under port 8080. To access the frontend, http://localhost:8080")
 
 	<-sig
 	log.Println("Shutting down...")

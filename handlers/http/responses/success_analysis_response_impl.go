@@ -33,6 +33,8 @@ type Url struct {
 	Latency int64  `json:"latency"`
 }
 
+// NewWebPageAnalyzerResponseManager function is responsible to create an
+// object of WebPageAnalyzerResponseManager.
 func NewWebPageAnalyzerResponseManager() WebPageAnalyzerResponseManager {
 	headings := make([]Heading, 0)
 	urls := make([]Url, 0)
@@ -44,30 +46,39 @@ func NewWebPageAnalyzerResponseManager() WebPageAnalyzerResponseManager {
 	}
 }
 
+// SetHtmlVersion function is responsible for setting the html
+// version.
 func (w *analysisSuccessResponseManager) SetHtmlVersion(htmlVersion string) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
 	w.successRes.HtmlVersion = htmlVersion
 }
 
+// SetTitle function is responsible for setting the page title.
 func (w *analysisSuccessResponseManager) SetTitle(title string) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
 	w.successRes.Title = title
 }
 
+// SetServiceTime function is responsible for setting the service
+// time.
 func (w *analysisSuccessResponseManager) SetServiceTime(serviceTime int64) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
 	w.successRes.ServiceTime = serviceTime
 }
 
+// SetExtractTime function is responsible for setting the web page
+// extracting time.
 func (w *analysisSuccessResponseManager) SetExtractTime(extractTime int64) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
 	w.successRes.WebExtractTime = extractTime
 }
 
+// AddHeadingLevel function is responsible for adding the headers
+// as well append the levels.
 func (w *analysisSuccessResponseManager) AddHeadingLevel(tag string, level string) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
@@ -97,6 +108,7 @@ func (w *analysisSuccessResponseManager) AddHeadingLevel(tag string, level strin
 	}
 }
 
+// AddUrlInfo function is responsible for adding the URL information.
 func (w *analysisSuccessResponseManager) AddUrlInfo(url string, urlType int, status int, latency int64) {
 	urlTypeStr := "External"
 
@@ -116,12 +128,16 @@ func (w *analysisSuccessResponseManager) AddUrlInfo(url string, urlType int, sta
 	w.successRes.Urls = append(w.successRes.Urls, u)
 }
 
+// SetHasLogin function is responsible for setting the login is
+//available or not.
 func (w *analysisSuccessResponseManager) SetHasLogin(hasLogin bool) {
 	w.lock.Lock()
 	defer w.lock.Unlock()
 	w.successRes.HasLogin = hasLogin
 }
 
+// ToString  function is responsible for getting the string
+//representation of the response.
 func (w *analysisSuccessResponseManager) ToString() string {
 	b, err := json.Marshal(w.successRes)
 	if err != nil {
@@ -130,6 +146,7 @@ func (w *analysisSuccessResponseManager) ToString() string {
 	return string(b)
 }
 
+// To function is responsible for generating the response object.
 func (w *analysisSuccessResponseManager) To() AnalysisSuccessResponse {
 	return w.successRes
 }

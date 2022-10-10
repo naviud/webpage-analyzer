@@ -19,6 +19,15 @@ func NewHeadingAnalyzer() Analyzer {
 	return &headingAnalyzer{}
 }
 
+// Analyze function is this implementation is for the analyzing the
+// heading tags(ex: <h1>, <h2>, <h3> etc)  in the provided web page.
+// This function iterates through the tokenized web page and finds out
+// the heading tags.
+// Also, this traverse through to get the data in the heading tags when
+// they wrap with other tags.
+// Ex: <h2><span>This is text</span></h2>
+// In such cases, this gets the text for the h2 tag as 'This is text'
+// instead of <span>This is text</span>.
 func (h *headingAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Heading analyzer started")

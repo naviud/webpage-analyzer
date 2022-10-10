@@ -14,6 +14,8 @@ func NewBodyExtractor() BodyExtractor {
 	return &bodyExtractor{}
 }
 
+// Extract function is responsible to extract the
+// properties of the given URL.
 func (b *bodyExtractor) Extract(url string) (host string, bodyStr string, responseTime int64, err error) {
 	startTime := time.Now()
 	log.Println("URL body fetching started")

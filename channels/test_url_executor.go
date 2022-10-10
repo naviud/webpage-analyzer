@@ -2,6 +2,9 @@ package channels
 
 import "sync"
 
+// This is an implementation for the UrlExecutor interface
+// in sake of unit testing purposes by mocking the actual
+// behavior.
 type testUrlExecutor struct {
 	url string
 	wg  *sync.WaitGroup

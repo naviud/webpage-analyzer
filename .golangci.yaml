@@ -2,9 +2,9 @@ run:
   tests: false
   skip-dirs:
     - mocks
-    - testify_mocks
     - test
     - vendor
+    - frontend
   go: '1.16'
 output:
   format: checkstyle:golangci-report.xml

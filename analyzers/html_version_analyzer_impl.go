@@ -28,6 +28,9 @@ func NewHtmlVersionAnalyzer() Analyzer {
 	return &obj
 }
 
+// Analyze function is this implementation for the analyzing the
+// html version in the provided web page. This function just matches
+// the string for the provided html versions.
 func (h *htmlVersionAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Html version analyzer started")
@@ -37,7 +40,9 @@ func (h *htmlVersionAnalyzer) Analyze(data schema.AnalyzerInfo, analysis respons
 
 	version := unknownVersion
 	for name, value := range h.types {
-		if strings.Contains(data.GetBody(), value) {
+		if strings.Contains(data.GetBody(), strings.ToLower(value)) ||
+			strings.Contains(data.GetBody(), strings.ToUpper(value)) ||
+			strings.Contains(data.GetBody(), value) {
 			version = name
 			break
 		}

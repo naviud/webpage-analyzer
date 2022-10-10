@@ -18,6 +18,11 @@ func NewTitleAnalyzer() Analyzer {
 	return &titleAnalyzer{}
 }
 
+// Analyze function this implementation is for analyzing the
+// title tag in the web page. This traverses through the
+// tokenized web page and finds out title tag. Once that is
+// found, this breaks the loop as a web page should contain
+// one title tag.
 func (t *titleAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Title analyzer started")

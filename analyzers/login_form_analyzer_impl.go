@@ -22,6 +22,10 @@ func NewLoginFormAnalyzer() Analyzer {
 	return &loginFormAnalyzer{}
 }
 
+// Analyze function in this implementation is for analyzing
+// the login forms. Having said this is supposed to analyze
+// login forms, it analyzes the <input> tags with type as
+// 'password'. Such tag is found, this quits from the loop.
 func (l *loginFormAnalyzer) Analyze(data schema.AnalyzerInfo, analysis responses.WebPageAnalyzerResponseManager) {
 	startTime := time.Now()
 	log.Println("Login form analyzer started")

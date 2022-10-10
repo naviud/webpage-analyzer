@@ -6,21 +6,42 @@
   <component name="ChangeListManager">
     <list default="true" id="40d09095-ac05-4541-95b6-cde6a4e81a9c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.golangci.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.golangci.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scannerwork/report-task.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.scannerwork/report-task.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cover.out.tmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golangci-report.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/heading_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/heading_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/html_version_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/html_version_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/link_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/link_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/login_form_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/login_form_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/schema/analyzer_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/schema/analyzer_info.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/schema/analyzer_info_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/schema/analyzer_info_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/title_analyzer_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/title_analyzer_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzers/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/analyzers/util.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/test_url_executor.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/test_url_executor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/url_executor.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/url_executor_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/url_executor_provider.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor_provider.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channels/url_executor_provider_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/channels/url_executor_provider_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/app.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configurations/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/configurations/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configurations/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/configurations/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/3rdpartylicenses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/main.f94fda957ab02006.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/polyfills.bf370db51c44451e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/runtime.3066eeea821d8e67.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/firstapp/styles.64149f24ab077b0a.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webpage-analyzer-client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webpage-analyzer-client/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webpage-analyzer-client/main.521c9038f6e53ee7.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/http/controllers/body_extractor.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/controllers/body_extractor.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/http/controllers/body_extractor_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/controllers/body_extractor_impl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/http/controllers/webpage_analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/controllers/webpage_analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/engines/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/engines/default.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/http/responses/error_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/error_response.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/http/responses/success_analysis_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/success_analysis_response.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/http/responses/success_analysis_response_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/http/responses/success_analysis_response_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mocks/body_extractor_mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/mocks/body_extractor_mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mocks/success_analysis_response_mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/mocks/success_analysis_response_mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mocks/url_executor_mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/mocks/url_executor_mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sonar-scan.sh" beforeDir="false" afterPath="$PROJECT_DIR$/sonar-scan.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/success_analysis_response_impl_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/success_analysis_response_impl_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/webpage_analyzer_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/webpage_analyzer_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +87,8 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/home/udayanga/work/src/github.com/HasinduLanka/InspectGo",
+    "last_opened_file_path": "/home/udayanga/Downloads/Webpage Analyzer.drawio.png",
+    "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
@@ -75,7 +97,7 @@
       <recent name="$PROJECT_DIR$/frontend/firstapp" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.go test test">
+  <component name="RunManager" selected="Go Build.go build github.com/webpage-analyzer">
     <configuration name="go build github.com/webpage-analyzer" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="webpage-analyzer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -161,14 +183,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/analyzers/link_analyzer_impl.go</url>
-          <line>76</line>
-          <option name="timeStamp" value="78" />
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>63</line>
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/analyzers/link_analyzer_impl.go</url>
-          <line>72</line>
-          <option name="timeStamp" value="79" />
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>25</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

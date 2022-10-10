@@ -15,6 +15,8 @@ type appConfig struct {
 
 var config *appConfig
 
+// GetAppConfig function is responsible to get
+// thr sppConfig object.
 func GetAppConfig() *appConfig {
 	if config == nil {
 		config = &appConfig{}
@@ -22,6 +24,8 @@ func GetAppConfig() *appConfig {
 	return config
 }
 
+// Register function is responsible to read the
+// yaml file unmarshall it to the appConfig object.
 func (a *appConfig) Register() {
 	file, err := ioutil.ReadFile("configs/app.yaml")
 	if err != nil {
