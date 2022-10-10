@@ -92,7 +92,7 @@ This project integrates with the SonarQube with an **external linter called** [G
 
 `GolangCI-Lint` generates the `golangci-report.xml` file which is used by SonarQube to generate the report. In order to do this, `golangci-lint run` command should be executed. Having said that, this should be installed as a Go module first. More information can be found from [here](https://github.com/golangci/golangci-lint).
 
-### build.sh
+### [build.sh](build.sh)
 
 Following tasks are carried out when executing this file.
 
