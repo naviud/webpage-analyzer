@@ -29,7 +29,7 @@ The information to be displayed to the user are based on the rule(analyzer) exec
 1. Analyzers should be isolated and new analyzers should be able to add to solution or existing analyzer modifications should not be affected to the rest of the rules.
 2. Since number of analyzers can be introduced, analyzer execution should be happened in a multi-threaded manner. This would leverage a good response time.
 
-![](/home/udayanga/Downloads/Webpage Analyzer.drawio.png)
+![](architecture_diagram.png)
 
 ## Solution Implementation
 
